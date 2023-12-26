@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{TITLE}}</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="reveal.js/dist/reset.css">
+  <link rel="stylesheet" href="reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="reveal.js/dist/theme/black.css">
+  <link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css">
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- CONTENT -->
+    </div>
+  </div>
+
+  <script src="reveal.js/dist/reveal.js"></script>
+  <script src="reveal.js/plugin/highlight/highlight.js"></script>
+  <script src="reveal.js/plugin/markdown/markdown.js"></script>
+  <script src="reveal.js/plugin/math/math.js"></script>
+  <script src="reveal.js/plugin/notes/notes.js"></script>
+
+  <script>
+    Reveal.initialize({
+      center: true,
+      controls: true,
+      hash: true,
+      history: true,
+      plugins: [
+        RevealHighlight,
+        RevealMarkdown,
+        RevealMath.KaTeX,
+        RevealMath.MathJax2,
+        RevealNotes,
+      ],
+      progress: true,
+      transition: 'linear',
+      view: 'slide',
+      mathjax2: {
+        config: 'TeX-AMS_HTML-full',
+        TeX: {
+          Macros: {
+            R: '\\mathbb{R}',
+            set: ['\\left\\{#1 \\; ; \\; #2\\right\\}', 2],
+          },
+        },
+      },
+    });
+  </script>
+
+  <script>
+    const socket = new WebSocket('ws://localhost:{{PORT}}');
+    socket.onmessage = function(event) {
+      if (event.data === 'reload') {
+        window.location.reload();
+      }
+    };
+  </script>
+</body>
+</html>
